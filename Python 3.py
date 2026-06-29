@@ -1,8 +1,8 @@
 """
 You are processing a batch of data from an IoT aquarium system.
- The system logs the water's pH level and temperature. 
- However, the pH sensor occasionally drops connection and sends the word "OFFLINE" instead of a number. 
- Furthermore, the valid pH readings are arriving as strings, while the temperature arrives as raw numbers.
+The system logs the water's pH level and temperature. 
+However, the pH sensor occasionally drops connection and sends the word "OFFLINE" instead of a number. 
+Furthermore, the valid pH readings are arriving as strings, while the temperature arrives as raw numbers.
 
 Your Mission: Clean the data, calculate the average pH level of the tank from the valid readings, and flag any dangerous temperature drops.
 
@@ -60,11 +60,16 @@ for log in sensor_logs:
     
     # --- YOUR LOGIC GOES HERE ---
     # 3. Check for "OFFLINE"
-    
+    if current_ph == "OFFLINE":
+        print("Warning: pH sensor offline. Skipping reading.")
+    elif current_temp >= 20.0:
+        print("SOS: Water temperature too low!")
+
     # 4 & 5. Process valid data (float translation, addition, and temp check)
-    
+
+average_variable = total_ph // valid_readings
 
 # --- FINAL MATH AND OUTPUT GOES HERE ---
 # 6. Calculate average
-
+print ("System Check Complete. Average pH: {average_variable}")
 # 7. Print final summary
