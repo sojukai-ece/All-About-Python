@@ -58,18 +58,22 @@ for log in sensor_logs:
     current_ph = log["pH"]
     current_temp = log["temp"]
     
-    # --- YOUR LOGIC GOES HERE ---
+    # YOUR LOGIC GOES HERE 
     # 3. Check for "OFFLINE"
     if current_ph == "OFFLINE":
         print("Warning: pH sensor offline. Skipping reading.")
-    elif current_temp >= 20.0:
-        print("SOS: Water temperature too low!")
-
     # 4 & 5. Process valid data (float translation, addition, and temp check)
+    else:
+        clean_ph = float(current_ph)
 
-average_variable = total_ph // valid_readings
+        total_ph = total_ph + clean_ph
+        valid_reading = valid_readings + 1
+        if current_temp < 20.0:
+            print(f"SOS: Water temperature too low! (Current: {current_temp}C)")
 
-# --- FINAL MATH AND OUTPUT GOES HERE ---
+# FINAL MATH AND OUTPUT GOES HERE 
 # 6. Calculate average
-print ("System Check Complete. Average pH: {average_variable}")
+average_ph = total_ph / valid_reading
+
 # 7. Print final summary
+print (f"System Check Complete. Average pH: {average_ph}")
